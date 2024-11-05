@@ -1,11 +1,11 @@
 ChartType,Task,Correct,ResponseTime,ImageFilename
-heatmap,highest absences for School 8,True,16.833741426467896,charts/trial_1_heatmap.png
-heatmap,highest absences for School 3,True,18.62778663635254,charts/trial_2_heatmap.png
-heatmap,highest absences for School 8,True,8.258268117904663,charts/trial_3_heatmap.png
-heatmap,highest absences for School 3,True,8.696315050125122,charts/trial_4_heatmap.png
-heatmap,highest absences for School 4,True,5.813297510147095,charts/trial_5_heatmap.png
-scatterplot,highest absences for School 7,True,14.969276428222656,charts/trial_6_scatterplot.png
-scatterplot,highest absences for School 10,True,15.986266374588013,charts/trial_7_scatterplot.png
-scatterplot,highest absences for School 4,True,15.058130502700806,charts/trial_8_scatterplot.png
-scatterplot,highest absences for School 7,True,20.10689377784729,charts/trial_9_scatterplot.png
-scatterplot,highest absences for School 5,True,13.34957504272461,charts/trial_10_scatterplot.png
+heatmap,highest absences for School 7,False,12.238993883132935,charts/trial_1_heatmap.png
+heatmap,highest absences for School 9,False,7.737121343612671,charts/trial_2_heatmap.png
+heatmap,highest absences for School 3,False,12.0842444896698,charts/trial_3_heatmap.png
+heatmap,highest absences for School 3,False,7.022774696350098,charts/trial_4_heatmap.png
+heatmap,highest absences for School 5,False,5.011773347854614,charts/trial_5_heatmap.png
+scatterplot,highest absences for School 7,True,14.017544269561768,charts/trial_6_scatterplot.png
+scatterplot,highest absences for School 4,True,8.000516653060913,charts/trial_7_scatterplot.png
+scatterplot,highest absences for School 2,True,6.926578044891357,charts/trial_8_scatterplot.png
+scatterplot,highest absences for School 10,True,12.163804292678833,charts/trial_9_scatterplot.png
+scatterplot,highest absences for School 10,True,7.636635780334473,charts/trial_10_scatterplot.png
