@@ -163,12 +163,16 @@ def run_next_trial():
         show_scatterplot(current_data, task_description)
 
 # Save results to CSV
+
+# Define the directory for saving results
+RESULTS_DIR = 'Results'  # Change this to your desired directory
+
 def save_results():
-    with open('experiment_results.csv', 'w', newline='') as f:
+    with open(f'{RESULTS_DIR}/experiment_results.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['ChartType', 'Task', 'Correct', 'ResponseTime', 'ImageFilename'])
         writer.writerows(results)
-    print("Experiment complete. Results saved to experiment_results.csv.")
+    print(f"Experiment complete. Results saved to {RESULTS_DIR}/experiment_results.csv.")
 
 # Main experiment run
 if __name__ == '__main__':
