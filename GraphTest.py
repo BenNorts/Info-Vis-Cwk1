@@ -203,30 +203,37 @@ def show_heatmap(data):
 def show_scatterplot(data):
     fig, ax = plt.subplots(figsize=(15, 9))
     colors = plt.cm.tab10(np.linspace(0, 1, NUM_SCHOOLS))
-    markers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
+    markers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']  # Number labels for each school
+    
     for school_id in range(NUM_SCHOOLS):
         x_values = np.arange(NUM_MONTHS)
         y_values = data[school_id]
-        
-        # Plotting invisible scatter points to serve as positions for the numbers
-        ax.scatter(x_values, y_values, color=colors[school_id], s=0, label=f'School {school_id + 1}')
-        
+
+        # Plotting invisible scatter points (just for positioning)
+        ax.scatter(x_values, y_values, color=colors[school_id], s=0)
+
         # Adding text annotations as markers
         for x, y in zip(x_values, y_values):
-            ax.text(x, y, markers[school_id % len(markers)], ha='center', va='center', 
-                    fontsize=14, fontweight='bold', color=colors[school_id])
+            ax.text(x, y, markers[school_id], ha='center', va='center', fontsize=14, fontweight='bold', color=colors[school_id])
 
     ax.set_xlabel('Month', fontsize=11)
     ax.set_ylabel('Absences', fontsize=11)
     ax.set_title("Pupil absences across 10 schools in Leeds", fontsize=11)
+
     months_labels = [f'Month {i + 1}' for i in range(NUM_MONTHS)]
     ax.set_xticks(np.arange(NUM_MONTHS))
     ax.set_xticklabels(months_labels, rotation=45)
     ax.set_yticks(range(0, 101, 10))
-    ax.legend(loc='best', bbox_to_anchor=(1.15, 1))
+
+    # Manually create a "legend" using text outside the plot area
+    for school_id in range(NUM_SCHOOLS):
+        ax.text(1.01, 0.98 - (school_id * 0.05), markers[school_id], transform=ax.transAxes,
+                ha='left', va='center', fontsize=14, fontweight='bold', color=colors[school_id])
+        ax.text(1.038, 0.98 - (school_id * 0.05), f'School {school_id + 1}', transform=ax.transAxes,
+                ha='left', va='center', fontsize=11, color='black')
+
     ax.grid(False)
-    
 
     embed_plot_in_tkinter(fig)
 
