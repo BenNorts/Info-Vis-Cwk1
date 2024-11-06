@@ -27,6 +27,20 @@ questions = [
     "Are there more absences in the first half of the year (1 to 6) or the second half (7 to 12) in School -?"
 ]
 
+# Mapping each question to its expected answer format
+answer_formats = {
+    "Which school had the highest number of absences in month _?": "Enter a school number e.g 2",
+    "Which school had the lowest number of absences in month _?": "Enter a school number e.g 2",
+    "Which month were absences across all schools the highest?": "Enter a month number 1-12 e.g 3",
+    "Is there a noticeable difference in absences between School - and School ^ in Month _? (A difference of 10 or more)": "Enter yes or no e.g yes",
+    "Did School - have more absences in Month _ or Month *?": "Enter a month number 1-12 e.g 3",
+    "Which month shows the greatest range in absences across schools?": "Enter a month number 1-12 e.g 3",
+    "Which school had the most consistent number of absences throughout the year?": "Enter a school number e.g 2",
+    "Identify the school with the largest decrease in absences from one month to the next.": "Enter a school number e.g 2",
+    "Which month had the second highest absences for School -?": "Enter a month number 1-12 e.g 3",
+    "Are there more absences in the first half of the year (1 to 6) or the second half (7 to 12) in School -?": "Enter first half or second half e.g. first half"
+}
+
 # Global state variables encapsulated in a dictionary for clarity
 state = {
     "current_trial": 0,
@@ -53,6 +67,11 @@ def get_randomised_questions():
 
 # Initial question list with randomised elements
 question_list = get_randomised_questions()
+state["task_description"] = question_list[0]  # Set the first question
+
+# Set initial answer format for the first question
+initial_answer_format = answer_formats.get(state["task_description"], "Enter answer in correct format")
+
 
 # Ensure directories exist
 os.makedirs(IMAGE_DIR, exist_ok=True)
@@ -304,6 +323,10 @@ def run_next_trial_actual():
     state["task_description"] = question_list[state["current_trial"] % len(question_list)]
     state["correct_answer"] = calculate_answer(state["task_description"], state["current_data"])
     
+    # Update the answer format label based on the current question
+    answer_format = answer_formats.get(state["task_description"], "Enter answer in correct format")
+    answer_format_label.config(text=answer_format)
+
     global start_time
     start_time = time.time()
 
@@ -332,6 +355,12 @@ plot_frame.pack(fill=tk.BOTH, expand=True)  # Make it fill the entire window
 
 entry_label = ttk.Label(root, text="", font=("Arial", 11))
 entry_label.pack(pady=5)
+
+# Adding an answer format label
+answer_format_label = ttk.Label(root, text=initial_answer_format, font=("Arial", 12))
+answer_format_label.pack(side=tk.LEFT, padx=(0, 10), pady=5)  # Place it next to the entry box
+
+# User input box
 entry = ttk.Entry(root, font=("Arial", 11), width=20)
 submit_button = ttk.Button(root, text="Submit", command=on_input)
 entry.bind('<Return>', on_input)
