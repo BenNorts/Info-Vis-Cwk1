@@ -24,7 +24,7 @@ questions = [
     "Which school had the most consistent number of absences throughout the year?",
     "Identify the school with the largest decrease in absences from one month to the next.",
     "Which month had the second highest absences for School -?",
-    "Are there more absences in the first half of the year (January to June) or the second half (July to December) in School -?"
+    "Are there more absences in the first half of the year (1 to 6) or the second half (7 to 12) in School -?"
 ]
 
 # Global state variables encapsulated in a dictionary for clarity
