@@ -226,6 +226,7 @@ def show_scatterplot(data):
     ax.set_yticks(range(0, 101, 10))
     ax.legend(loc='best', bbox_to_anchor=(1.15, 1))
     ax.grid(False)
+    
 
     embed_plot_in_tkinter(fig)
 
@@ -234,6 +235,22 @@ def show_scatterplot(data):
 def embed_plot_in_tkinter(fig):
     for widget in plot_frame.winfo_children():
         widget.destroy()  # Clear previous plot
+
+    #################
+
+    # Ensuring figure in full size adjusts for screen size
+    # Calculate available screen dimensions
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    
+    # Leave space for entry and submit button (about 150 pixels)
+    plot_height = screen_height - 150  
+
+    # Convert pixel dimensions to inches (assuming 100 DPI)
+    fig.set_size_inches(screen_width / 100, plot_height / 100)
+
+    ####################
+
 
     canvas = FigureCanvasTkAgg(fig, master=plot_frame)
     canvas.draw()
@@ -313,9 +330,9 @@ root.attributes("-fullscreen", True)  # Enable fullscreen mode
 plot_frame = ttk.Frame(root)
 plot_frame.pack(fill=tk.BOTH, expand=True)  # Make it fill the entire window
 
-entry_label = ttk.Label(root, text="", font=("Arial", 14))
+entry_label = ttk.Label(root, text="", font=("Arial", 11))
 entry_label.pack(pady=5)
-entry = ttk.Entry(root, font=("Arial", 14), width=20)
+entry = ttk.Entry(root, font=("Arial", 11), width=20)
 submit_button = ttk.Button(root, text="Submit", command=on_input)
 entry.bind('<Return>', on_input)
 
