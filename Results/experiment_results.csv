@@ -1,11 +1,21 @@
-ChartType,Task,Correct,ResponseTime,ImageFilename
-heatmap,highest absences for School 7,False,12.238993883132935,charts/trial_1_heatmap.png
-heatmap,highest absences for School 9,False,7.737121343612671,charts/trial_2_heatmap.png
-heatmap,highest absences for School 3,False,12.0842444896698,charts/trial_3_heatmap.png
-heatmap,highest absences for School 3,False,7.022774696350098,charts/trial_4_heatmap.png
-heatmap,highest absences for School 5,False,5.011773347854614,charts/trial_5_heatmap.png
-scatterplot,highest absences for School 7,True,14.017544269561768,charts/trial_6_scatterplot.png
-scatterplot,highest absences for School 4,True,8.000516653060913,charts/trial_7_scatterplot.png
-scatterplot,highest absences for School 2,True,6.926578044891357,charts/trial_8_scatterplot.png
-scatterplot,highest absences for School 10,True,12.163804292678833,charts/trial_9_scatterplot.png
-scatterplot,highest absences for School 10,True,7.636635780334473,charts/trial_10_scatterplot.png
+ChartType,Task,Correct,CorrectAnswer,UserResponse,ResponseTime,ImageFilename
+heatmap,Identify the school with the largest decrease in absences from one month to the next.,True,7,7,30.30362343788147,charts/trial_1_heatmap.png
+heatmap,Which month had the second highest absences for School 6?,True,8,8,5.897809028625488,charts/trial_2_heatmap.png
+heatmap,Is there a noticeable difference in absences between School 3 and School 10 in Month 5? (A difference of 10 or more),True,yes,yes,5.471206426620483,charts/trial_3_heatmap.png
+heatmap,Which month were absences across all schools the highest?,True,5,5,2.6219873428344727,charts/trial_4_heatmap.png
+heatmap,Which school had the most consistent number of absences throughout the year?,True,7,7,1.9555585384368896,charts/trial_5_heatmap.png
+heatmap,Did School 4 have more absences in Month 1 or Month 12?,True,1,1,1.8288257122039795,charts/trial_6_heatmap.png
+heatmap,Which school had the highest number of absences in month 8?,True,3,3,1.1862010955810547,charts/trial_7_heatmap.png
+heatmap,Are there more absences in the first half of the year (January to June) or the second half (July to December) in School 5?,True,first half,first half,3.3628997802734375,charts/trial_8_heatmap.png
+heatmap,Which month shows the greatest range in absences across schools?,True,11,11,1.7338390350341797,charts/trial_9_heatmap.png
+heatmap,Which school had the lowest number of absences in month 6?,True,8,8,1.7036359310150146,charts/trial_10_heatmap.png
+scatterplot,Which school had the lowest number of absences in month 12?,True,7,7,2.2519731521606445,charts/trial_11_scatterplot.png
+scatterplot,Which school had the highest number of absences in month 5?,True,10,10,2.2897226810455322,charts/trial_12_scatterplot.png
+scatterplot,Identify the school with the largest decrease in absences from one month to the next.,True,9,9,1.864041805267334,charts/trial_13_scatterplot.png
+scatterplot,Which school had the most consistent number of absences throughout the year?,True,8,8,1.6595971584320068,charts/trial_14_scatterplot.png
+scatterplot,Which month were absences across all schools the highest?,True,7,7,1.5689222812652588,charts/trial_15_scatterplot.png
+scatterplot,Are there more absences in the first half of the year (January to June) or the second half (July to December) in School 10?,True,second half,second half,4.052328824996948,charts/trial_16_scatterplot.png
+scatterplot,Which month had the second highest absences for School 6?,True,6,6,3.5481925010681152,charts/trial_17_scatterplot.png
+scatterplot,Is there a noticeable difference in absences between School 1 and School 2 in Month 5? (A difference of 10 or more),True,yes,yes,2.6640827655792236,charts/trial_18_scatterplot.png
+scatterplot,Which month shows the greatest range in absences across schools?,True,8,8,4.594375371932983,charts/trial_19_scatterplot.png
+scatterplot,Did School 9 have more absences in Month 1 or Month 5?,True,1,1,5.900872707366943,charts/trial_20_scatterplot.png
