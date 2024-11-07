@@ -189,7 +189,7 @@ def show_heatmap(data):
 
     #To set Nan cells as grey
     cmap = plt.cm.YlOrRd
-    cmap.set_bad(color='grey')
+    cmap.set_bad(color='lightgrey')
     
     # Create the heatmap
     cax = ax.imshow(data, cmap=cmap, aspect='auto')
@@ -229,7 +229,7 @@ def show_scatterplot(data):
     colors = plt.cm.tab10(np.linspace(0, 1, NUM_SCHOOLS))
 
     markers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']  # Number labels for each school
-    
+
     for school_id in range(NUM_SCHOOLS):
         x_values = np.arange(NUM_MONTHS)
         y_values = data[school_id]
@@ -239,7 +239,8 @@ def show_scatterplot(data):
 
         # Adding text annotations as markers
         for x, y in zip(x_values, y_values):
-            ax.text(x, y, markers[school_id], ha='center', va='center', fontsize=14, fontweight='bold', color=colors[school_id])
+            color = 'grey' if x == 7 else colors[school_id]  # Grey text for August
+            ax.text(x, y, markers[school_id], ha='center', va='center', fontsize=14, fontweight='bold', color=color)
 
     ax.set_xlabel('Month', fontsize=11)
     ax.set_ylabel('Absences', fontsize=11)
