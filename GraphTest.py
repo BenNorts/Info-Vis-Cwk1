@@ -59,7 +59,10 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 
 # Generate random data
 def generate_data():
-    return np.random.randint(0, 100, (NUM_SCHOOLS, NUM_MONTHS))
+    # Generate random data
+    data = np.random.randint(0, 100, (NUM_SCHOOLS, NUM_MONTHS)).astype(float)
+    data[:, 7] = np.nan  # Set absences for August (8th month) to zero
+    return data
 
 # Adjusted calculate_answer function
 def calculate_answer(question, data):
@@ -183,10 +186,27 @@ def save_plot(chart_type):
 # Heatmap and scatterplot functions
 def show_heatmap(data):
     fig, ax = plt.subplots(figsize=(15, 9))
-    ax.imshow(data, cmap='YlOrRd', aspect='auto')
+
+    #To set Nan cells as grey
+    cmap = plt.cm.YlOrRd
+    cmap.set_bad(color='grey')
+    
+    # Create the heatmap
+    cax = ax.imshow(data, cmap=cmap, aspect='auto')
+    
+    # Adjust layout to make space for the color bar
+    fig.subplots_adjust(right=0.95)  # Adjusts figure to create space on the right
+
+    # Add the color bar with custom positioning
+    cbar = fig.colorbar(cax, ax=ax, orientation='vertical', fraction=0.046, pad=0.05)
+    cbar.set_label('Number of Absences')  # Label for the color bar
+    
+    # Set labels and title
     ax.set_xlabel('Month', fontsize=11)
     ax.set_ylabel('School', fontsize=11)
     ax.set_title("Pupil absences across 10 schools in Leeds", fontsize=11)
+    
+    # Set ticks for months and schools
     months = [f'Month {i+1}' for i in range(data.shape[1])]
     schools = [f'School {i+1}' for i in range(data.shape[0])]
     ax.set_xticks(np.arange(data.shape[1]))
@@ -195,9 +215,14 @@ def show_heatmap(data):
     ax.set_yticklabels(schools)
 
     for i in range(data.shape[0]):
-        for j in range(data.shape[1]):
-            ax.text(j, i, str(data[i, j]), ha='center', va='center', color='black')
+            for j in range(data.shape[1]):
+                if not np.isnan(data[i, j]):  # Only add text if the value is not NaN
+                    ax.text(j, i, str(int(data[i, j])), ha='center', va='center', color='black')
+    
+    # Embed the plot in tkinter
     embed_plot_in_tkinter(fig)
+
+
 
 def show_scatterplot(data):
     fig, ax = plt.subplots(figsize=(15, 9))
