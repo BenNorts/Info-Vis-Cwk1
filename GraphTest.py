@@ -8,6 +8,15 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import os
 import random
 
+################################################################
+# To start with heatmaps, first change state[chart_type] dict
+# value to 'heatmap'
+# Then go to run_next_trial_actual(), comment out the 
+# scatterplot code, and uncomment the heatmap code.
+
+# Vice Versa for starting with scatterplots
+################################################################
+
 # Configuration parameters
 NUM_TRIALS = 10
 NUM_SCHOOLS = 10
@@ -15,8 +24,8 @@ NUM_MONTHS = 12
 IMAGE_DIR = 'charts'
 RESULTS_DIR = 'Results'
 questions = [
-    "Which school had the highest number of absences in month _?",
-    "Which school had the lowest number of absences in month _?",
+    "Which school had the highest number of absences in month _?\n EXAMPLE ANSWER",
+    "Which school had the lowest number of absences in month _?\n EXAMPLE ANSWER",
     "Which month were absences across all schools the highest?",
     "Is there a noticeable difference in absences between School - and School ^ in Month _? (A difference of 10 or more)",
     "Did School - have more absences in Month _ or Month *?",
@@ -76,13 +85,15 @@ def calculate_answer(question, data):
     # Generate answers based on each question type
     try:
         if "highest number of absences" in question:
-            school_id = int(question.split()[-1][:-1]) - 1
+            splitq = question.split('\n', 1)[0]
+            school_id = int(splitq.split()[-1][:-1]) - 1
             result = np.argmax(data[:, school_id]) + 1
             print(f"Correct answer calculated: {result}")
             return result 
 
         elif "lowest number of absences" in question:
-            school_id = int(question.split()[-1][:-1]) - 1
+            splitq = question.split('\n', 1)[0]
+            school_id = int(splitq.split()[-1][:-1]) - 1
             result = np.argmin(data[:, school_id]) + 1
             print(f"Correct answer calculated: {result}")
             return result 
@@ -295,9 +306,13 @@ def embed_plot_in_tkinter(fig):
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-    # Ensure the question label is updated and repacked
-    entry_label.config(text=f"Question: {state['task_description']}")
-    entry_label.pack()  # Make sure it is packed after updating the text
+   # Ensure the question label is updated and repacked with centered alignment
+    entry_label.config(
+        text=f"Question: {state['task_description']}",
+        justify='center',   # Center-align text in the label
+        anchor='center'     # Center-align the label widget itself in the container
+    )
+    entry_label.pack(fill=tk.X, pady=5)  # Use fill=tk.X to allow centering across the available width
     entry.pack()
     submit_button.pack()
 
@@ -337,8 +352,12 @@ def run_next_trial_actual():
         global question_list
         question_list = get_randomised_questions()
 
-    # Switch between heatmap and scatterplot
+    # Switch from heatmap to scatterplot
     state["chart_type"] = 'scatterplot' if state["current_trial"] >= NUM_TRIALS else 'heatmap'
+
+    # Switch from scatterplot to heatmap
+    #state["chart_type"] = 'heatmap' if state["current_trial"] >= NUM_TRIALS else 'scatterplot'
+
     state["current_data"] = generate_data()
     state["task_description"] = question_list[state["current_trial"] % len(question_list)]
     state["correct_answer"] = calculate_answer(state["task_description"], state["current_data"])
