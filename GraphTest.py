@@ -42,12 +42,11 @@ state = {
 def get_randomised_questions():
     customised_questions = []
     for question in random.sample(questions, len(questions)):
-        # Replace "_" and "-" with randomised values
-        if "_" or "*" or "-" or "^" in question:
-            question = question.replace("_", str(np.random.randint(1, NUM_MONTHS + 1)))
-            question = question.replace("*", str(np.random.randint(1, NUM_MONTHS + 1)))
-            question = question.replace("-", str(np.random.randint(1, NUM_SCHOOLS + 1)))
-            question = question.replace("^", str(np.random.randint(1, NUM_SCHOOLS + 1)))
+        # Replace "_" and "-" and "^" and "^" with randomised values
+        month1, month2 = random.sample(range(1, NUM_MONTHS + 1), 2)
+        question = question.replace("_", str(month1)).replace("*", str(month2))
+        school1, school2 = random.sample(range(1, NUM_SCHOOLS + 1), 2)
+        question = question.replace("-", str(school1)).replace("^", str(school2))
         customised_questions.append(question)
     return customised_questions
 
