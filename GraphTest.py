@@ -24,16 +24,16 @@ NUM_MONTHS = 12
 IMAGE_DIR = 'charts'
 RESULTS_DIR = 'Results'
 questions = [
-    "Which school had the highest number of absences in month _?\n EXAMPLE ANSWER",
-    "Which school had the lowest number of absences in month _?\n EXAMPLE ANSWER",
-    "Which month were absences across all schools the highest?",
-    "Is there a noticeable difference in absences between School - and School ^ in Month _? (A difference of 10 or more)",
-    "Did School - have more absences in Month _ or Month *?",
-    "Which month shows the greatest range in absences across schools?",
-    "Which school had the most consistent number of absences throughout the year?",
-    "Identify the school with the largest decrease in absences from one month to the next.",
-    "Which month had the second highest absences for School -?",
-    "Are there more absences in the first half of the year (1 to 6) or the second half (7 to 12) in School -?"
+    "Which school had the highest number of absences in month _?\n Please answer with a number between 1 and 10",
+    "Which school had the lowest number of absences in month _?\n Please answer with a number between 1 and 10",
+    "Which month were absences across all schools the highest?\n Please answer with a number between 1 and 12",
+    "Is there a difference of 10 or more in absences between School - and School ^ in Month _?\n Please answer with either yes or no",
+    "Did School - have more absences in Month _ or Month *?\n Please answer with a number between 1 and 12",
+    "Which month shows the greatest range in absences across schools?\n Please answer with a number between 1 and 12",
+    "Which school had the most consistent number of absences throughout the year?\n Please answer with a number between 1 and 10",
+    "Identify the school with the largest decrease in absences from one month to the next.\n Please answer with a number between 1 and 10",
+    "Which month had the second highest absences for School -?\n Please answer with a number between 1 and 12",
+    "Are there more absences in the first half of the year (1 to 6) or the second half (7 to 12) in School -?\n Please answer with either first or second"
 ]
 
 # Global state variables encapsulated in a dictionary for clarity
@@ -85,15 +85,15 @@ def calculate_answer(question, data):
     # Generate answers based on each question type
     try:
         if "highest number of absences" in question:
-            splitq = question.split('\n', 1)[0]
-            school_id = int(splitq.split()[-1][:-1]) - 1
+            splitq = question.split('?\n', 1)[0]
+            school_id = int(splitq.split()[-1]) - 1
             result = np.argmax(data[:, school_id]) + 1
             print(f"Correct answer calculated: {result}")
             return result 
 
         elif "lowest number of absences" in question:
-            splitq = question.split('\n', 1)[0]
-            school_id = int(splitq.split()[-1][:-1]) - 1
+            splitq = question.split('?\n', 1)[0]
+            school_id = int(splitq.split()[-1]) - 1
             result = np.argmin(data[:, school_id]) + 1
             print(f"Correct answer calculated: {result}")
             return result 
@@ -103,10 +103,11 @@ def calculate_answer(question, data):
             print(f"Correct answer calculated: {result}")
             return result
 
-        elif "difference in absences between School" in question:
-            school1 = int(question.split()[-13]) - 1
-            school2 = int(question.split()[-10]) - 1
-            month = int(question.split()[-7][:-1]) - 1
+        elif "difference of 10" in question:
+            splitq = question.split('?\n', 1)[0]
+            school1 = int(splitq.split()[-7]) - 1
+            school2 = int(splitq.split()[-4]) - 1
+            month = int(splitq.split()[-1]) - 1
             difference = abs(data[school1, month] - data[school2, month])
             if difference < 10:
                 result = "no"
@@ -116,9 +117,10 @@ def calculate_answer(question, data):
             return result 
 
         elif "more absences in Month" in question:
-            school_id = int(question.split()[-10]) - 1
-            month1 = int(question.split()[-1][:-1]) - 1
-            month2 = int(question.split()[-4]) - 1
+            splitq = question.split('?\n', 1)[0]
+            school_id = int(splitq.split()[-10]) - 1
+            month1 = int(splitq.split()[-1]) - 1
+            month2 = int(splitq.split()[-4]) - 1
             if data[school_id, month1] > data[school_id, month2]:
                 result = month1 + 1  
             else:
@@ -145,20 +147,22 @@ def calculate_answer(question, data):
             return result
 
         elif "second highest absences for School" in question:
-            school_id = int(question.split()[-1][:-1]) - 1
+            splitq = question.split('?\n', 1)[0]
+            school_id = int(splitq.split()[-1]) - 1
             sorted_absences = np.argsort(data[school_id])
             result = sorted_absences[-2] + 1
             print(f"Correct answer calculated: {result}")
             return result
 
         elif "more absences in the first half of the year" in question:
-            school_id = int(question.split()[-1][:-1]) - 1
+            splitq = question.split('?\n', 1)[0]
+            school_id = int(splitq.split()[-1]) - 1
             first_half_sum = data[school_id, :6].sum()
             second_half_sum = data[school_id, 6:].sum()
             if first_half_sum > second_half_sum:
-                result = "first half" 
+                result = "first" 
             else:
-                result = "second half"
+                result = "second"
             print(f"Correct answer calculated: {result}")
             return result
             
