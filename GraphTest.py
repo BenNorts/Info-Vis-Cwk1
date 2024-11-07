@@ -24,16 +24,16 @@ NUM_MONTHS = 12
 IMAGE_DIR = 'charts'
 RESULTS_DIR = 'Results'
 questions = [
-    "Which school had the highest number of absences in month _?\n Please answer with a number between 1 and 10",
-    "Which school had the lowest number of absences in month _?\n Please answer with a number between 1 and 10",
-    "Which month were absences across all schools the highest?\n Please answer with a number between 1 and 12",
-    "Is there a difference of 10 or more in absences between School - and School ^ in Month _?\n Please answer with either yes or no",
-    "Did School - have more absences in Month _ or Month *?\n Please answer with a number between 1 and 12",
-    "Which month shows the greatest range in absences across schools?\n Please answer with a number between 1 and 12",
-    "Which school had the most consistent number of absences throughout the year?\n Please answer with a number between 1 and 10",
-    "Identify the school with the largest decrease in absences from one month to the next.\n Please answer with a number between 1 and 10",
-    "Which month had the second highest absences for School -?\n Please answer with a number between 1 and 12",
-    "Are there more absences in the first half of the year (1 to 6) or the second half (7 to 12) in School -?\n Please answer with either first or second"
+    "Which school had the highest number of absences in month _?\n Please answer with a number between 1 and 10. For example if you think the answer is School 1, type 1 into the text box and press 'Submit'",
+    "Which school had the lowest number of absences in month _?\n Please answer with a number between 1 and 10. For example if you think the answer is School 2, type 2 into the text box and press 'Submit'",
+    "Which month were absences across all schools the highest?\n Please answer with a number between 1 and 12. For example if you think the answer is Month 5, type 5 into the text box and press 'Submit'",
+    "Is there a difference of 10 or more in absences between School - and School ^ in Month _?\n Please answer by typing either yes or no into the text box and pressing 'Submit'",
+    "Did School - have more absences in Month _ or Month *?\n Please answer with a number between 1 and 12. For example if you think the answer is Month 3, type 3 into the text box and press 'Submit'",
+    "Which month shows the greatest range in absences across schools?\n Please answer with a number between 1 and 12. For example if you think the answer is Month 4, type 4 into the text box and press 'Submit'",
+    "Which school had the most consistent number of absences throughout the year?\n Please answer with a number between 1 and 10. For example if you think the answer is School 7, type 7 into the text box and press 'Submit'",
+    "Identify the school with the largest decrease in absences from one month to the next.\n Please answer with a number between 1 and 10. For example if you think the answer is School 9, type 9 into the text box and press 'Submit'",
+    "Which month had the second highest absences for School -?\n Please answer with a number between 1 and 12. For example if you think the answer is Month 8, type 8 into the text box and press 'Submit'",
+    "Are there more absences in the first half of the year (1 to 6) or the second half (7 to 12) in School -?\n Please answer by either typing first or second into the text box and pressing 'Submit'"
 ]
 
 # Global state variables encapsulated in a dictionary for clarity
